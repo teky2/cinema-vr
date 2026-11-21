@@ -1,4 +1,4 @@
-const CACHE = 'cinema-vr-v1';
+const CACHE = 'cinema-vr-v2';
 const SHELL = ['./','./index.html','./css/app.css','./js/app.js',
                './manifest.webmanifest','./icons/icon.svg'];
 self.addEventListener('install', e => e.waitUntil(
