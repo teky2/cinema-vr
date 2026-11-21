@@ -34,8 +34,9 @@ services:
     name: cinema-vr-proxy
     runtime: node
     plan: free
+    region: singapore
     rootDir: proxy
-    buildCommand: ""
+    buildCommand: npm install
     startCommand: node server.mjs
     envVars:
       - key: NODE_VERSION
