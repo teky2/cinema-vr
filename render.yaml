@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: cinema-vr
+    runtime: static
+    staticPublishPath: .
+    buildCommand: ""
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: gyroscope=(self), fullscreen=(self), screen-wake-lock=(self)
+      - path: /*
+        name: Content-Security-Policy
+        value: >-
+          default-src 'self';
+          script-src 'self' https://esm.sh https://cdn.jsdelivr.net 'unsafe-inline';
+          style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:;
+          media-src 'self' blob: https:; connect-src 'self' https:;
+          frame-src https://www.youtube.com https://player.vimeo.com
+          https://www.dailymotion.com https://player.twitch.tv
+          https://www.hotstar.com https://www.jiohotstar.com
+          https://cinema-vr-proxy.onrender.com;
+          font-src 'self' data:;
+      - path: /sw.js
+        name: Cache-Control
+        value: no-cache
+
+  - type: web
+    name: cinema-vr-proxy
+    runtime: node
+    plan: free
+    rootDir: proxy
+    buildCommand: ""
+    startCommand: node server.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: "20.11.0"

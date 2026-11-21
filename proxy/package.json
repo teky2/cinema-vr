@@ -1,0 +1,2 @@
+{ "name": "cinema-vr-proxy", "type": "module", "private": true,
+  "engines": { "node": ">=20" }, "scripts": { "start": "node server.mjs" } }

@@ -1,0 +1,76 @@
+
+<div id="app">
+  <div id="stage" tabindex="0" aria-label="Video viewport">
+    <canvas id="gl"></canvas>
+    <div class="pane" id="paneL"></div>
+    <div class="pane" id="paneR"></div>
+    <div id="divider"></div><div id="vig"></div>
+  </div>
+
+  <section id="idle">
+    <h1>Cinema VR</h1>
+    <p>Paste a link, or open a local 360 file. Flat video plays in a stereo cinema; 360 files render on a real sphere.</p>
+    <div class="chips">
+      <button class="hs" id="hsHelp">Hotstar notes</button>
+      <button id="fileBtn">Open file</button>
+      <button id="demoBtn">Demo clip</button>
+    </div>
+    <p class="tiny">Drag to look · tap to hide controls · VR for gyro fullscreen</p>
+  </section>
+
+  <section id="fallback" aria-live="polite">
+    <h2 id="fbTitle">Embed blocked</h2>
+    <p id="fbBody"></p>
+    <div class="chips">
+      <button class="hs" id="fbApp">Open in app</button>
+      <button id="fbWeb">Open in browser</button>
+      <button id="fbProxy">Retry via proxy</button>
+      <button id="fbSkip">Continue anyway</button>
+    </div>
+  </section>
+
+  <section id="info" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+    <h3 id="infoTitle">Why some links are difficult</h3>
+    <p><b>Hotstar is Widevine DRM.</b> Decrypted frames never enter page memory, so the stream cannot be mapped onto a sphere. Their own player has to render it.</p>
+    <p><b>It is flat, not 360.</b> Stereo here is a perspective tilt. The <code>Cinema</code> slider sets eye separation.</p>
+    <p><b>Framing headers.</b> Hotstar restricts embedding. The proxy service moves the page out of the frame so the restriction stops applying.</p>
+    <p><b>Audio doubles.</b> Left pane stays muted.</p>
+    <p><b>Netflix, Disney+, Prime</b> block iframes entirely.</p>
+    <button class="wide" id="infoClose">Got it</button>
+  </section>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <div id="ui" class="hidden">
+    <div id="topbar">
+      <label class="sr" for="url">Video link</label>
+      <input id="url" placeholder="Paste hotstar.com link or .mp4" spellcheck="false" autocapitalize="off" inputmode="url" enterkeyhint="go">
+      <button class="icon primary" id="load" aria-label="Load link">→</button>
+    </div>
+    <div id="drawer">
+      <button id="grab" aria-label="Toggle controls"><span></span></button>
+      <div class="grid">
+        <button id="play"><span class="g">❚❚</span>Pause</button>
+        <button id="resync"><span class="g">⇆</span>Resync</button>
+        <button id="vr"><span class="g">▣</span>VR</button>
+        <button id="gyro"><span class="g">◎</span>Gyro</button>
+        <button id="sound"><span class="g">♪</span>Sound</button>
+        <button id="recenter"><span class="g">⌖</span>Center</button>
+        <button id="proxy"><span class="g">⇄</span>Proxy</button>
+        <button id="fileBtn2"><span class="g">+</span>File</button>
+        <button id="infoBtn"><span class="g">?</span>Notes</button>
+      </div>
+      <div class="sliders">
+        <label class="sl">Cinema / depth
+          <input type="range" id="depth" min="0" max="10" step="0.5" value="3.5"></label>
+        <label class="sl">Eye gap
+          <input type="range" id="ipd" min="0" max="0.14" step="0.005" value="0.064"></label>
+      </div>
+      <p id="status"><span class="dot"></span><span id="statusTxt">Idle</span></p>
+    </div>
+  </div>
+  <input type="file" id="file" accept="video/*" hidden="">
+</div>
+
+
+
